@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "iam:GenerateCredentialReport",
+                "iam:GetPolicyVersion",
+                "iam:GetAccountPasswordPolicy",
+                "iam:GetMFADevice",
+                "iam:GetServiceLastAccessedDetailsWithEntities",
+                "iam:GenerateServiceLastAccessedDetails",
+                "iam:GetServiceLastAccessedDetails",
+                "iam:GetGroup",
+                "iam:GetContextKeysForPrincipalPolicy",
+                "iam:GetOrganizationsAccessReport",
+                "iam:GetServiceLinkedRoleDeletionStatus",
+                "iam:SimulateCustomPolicy",
+                "iam:SimulatePrincipalPolicy",
+                "iam:GenerateOrganizationsAccessReport",
+                "iam:GetAccountEmailAddress",
+                "iam:GetCloudFrontPublicKey",
+                "iam:GetAccountAuthorizationDetails",
+                "iam:GetCredentialReport",
+                "iam:GetSAMLProvider",
+                "iam:GetServerCertificate",
+                "iam:GetRole",
+                "iam:GetInstanceProfile",
+                "iam:GetPolicy",
+                "iam:GetAccessKeyLastUsed",
+                "iam:GetSSHPublicKey",
+                "iam:GetContextKeysForCustomPolicy",
+                "iam:GetUserPolicy",
+                "iam:GetAccountName",
+                "iam:GetGroupPolicy",
+                "iam:GetUser",
+                "iam:GetOpenIDConnectProvider",
+                "iam:GetRolePolicy"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateVpcEndpointServiceConfiguration",
+                "iam:GenerateCredentialReport",
+                "ec2:CreateVpcEndpointConnectionNotification",
+                "iam:SimulateCustomPolicy",
+                "iam:GetPolicy",
+                "iam:GetMFADevice",
+                "iam:GetUserPolicy",
+                "ec2:CreateVpcEndpoint",
+                "iam:GenerateServiceLastAccessedDetails",
+                "ec2:CreateVpc",
+                "ec2:CreateVpcPeeringConnection",
+                "ec2:CreateVpnConnection"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
