@@ -1,2 +1,2 @@
 # fdec
-It is the task that i have completed that were allotted to me
+All the given tasks are present in their respective folders
