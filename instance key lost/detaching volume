@@ -1,0 +1,7 @@
+1.	Check the volume of the running instance.
+2.	Stop that instance.
+3.	Create a new instance (This instance would be use to take all data from forgotten key instance)
+4.	Rename the volume (do it if there are multiple volumes available, it is done so that we can identify the volume attach to that instance)
+5.	Detach volume from instance A (forgotten key instance). Detaching of volume can be done in Volume Tab.
+6.	Now attach the volume, select the new instance from the drop down menu.
+7.	Remove the new volume if required (instance B created a new volume while creating the instance).
