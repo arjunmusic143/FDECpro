@@ -1,0 +1,5 @@
+1.	Create the AMI (Amazon Machine Image) of the instance of you have lost the key of. 
+2.	Give proper name and description to the image, add more volume if needed.
+3.	Create new instance, select “My AMI’s” or select Browse more AMI and select My AMI there.
+4.	Now in Key pair, select different Key pair or generate a new key pair.
+5.	Click generate new instance, done.
