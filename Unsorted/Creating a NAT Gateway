@@ -1,0 +1,26 @@
+Creating VPC for private ec2 and creating a Jump server(Bastion Host) to access the private sub net.
+
+1.	Open VPC Service.
+2.	Give a proper name to VPC and for CIDR we will use – 192.168.0.0/16 and click Create VPC.
+3.	Go to Subnet, for this we will create 4 subnet (2 public, 2 private). 
+4.	From drop down menu select your VPC ID. We will choose first 2 availability zone for pub and cover third place of public subnet (192.168.1.0/24,192.168.2.0/24) and same for private subnet in increasing order only (192.168.3.0/24, 192.168.4.0/24).
+5.	Click on Internet Gateway and create one. Give a proper name so that you would know later. 
+6.	Click on Attach VPC once the igw is been created. 
+7.	Go to Route tables and click to create. Give a proper name and select the VPC (this is for public) go to subnet association and edit it and select the public subnet from the list. Goto routes subtab and click on edit routes and give public ip (0.0.0.0/0) and for target use igw that you have created in previous step.
+8.	Now we will straight head to NAT gateway first(as we want it for private) . Click on Create NAT gateway. Give some name. Select a public subnet (this will become our jump server for this we have taken pub-2) and let the connective type to public(as we want to access it) and select “Allocate Elastic IP” and click create. 
+9.	Now create Route table for private subnet give a proper name, attach vpc and click on create. Go to subnet association and this time select only private subnets. Goto routes subtab and click on edit give the destination as public only (0.0.0.0/0) and target would be the NAT gateway that we created in previous steps.
+10.	Open Ec2 instance.
+11.	Click on Launch and Give a proper name (we will give it jump Server)
+12.	Select proper AMI according to your needs, select key pair.
+13.	For Network Settings click on Edit – Select the VPC that you have Created. Select the subnet (as we are creating a jms we will select pub-2). Enable the Auto Assign-IP. Give name to security group and we will let the SSH as public and click on create.
+14.	Now we will create EC2 instance for private subnet. Give some proper name select type and key. For settings select the VPC you created and in subnet select private subnet. And we will disable the Auto assign-IP. And we will let the SSH selected. Give Security group some name.
+15.	Open CMD
+16.	Connect with the pub instance (jump server) (code – ssh -I keyname username@pub-ip)
+17.	We will now check if our instance is connected with the internet so we will use ping to check (for this I am pinging google server. I.e. ping 8.8.8.8). if we get the feedback then its good. If not then check the issue.
+18.	Now to make Jump Server a Real Jum Server. We will go to Security group of this instance (search by name that you have given in previous steps). Update the inbound rules, for type select “All ICMP – IPV4”, source “My IP”. And click on Save rules.
+19.	Now goto private security group and update SSH to public security group (search in search tab) and add new rule “All ICMP – IPV4” and in search bar search for public security group and select it.
+20.	Now go back to public instance cmd and ping to private instance (for this instance there would be no public ip, copy the private ip) and check if we getting any reply (ping private-ip). If we get private ip means everything is working fine, if not then there is some issue. 
+21.	Now open the cmd where your key is and send that key to our JMS. For this we will use secure copy command. (scp -I keyname filename username@pub-ip:folder-path). It would show that it is completed.
+22.	Now go back to your instance and check your file. As the copy is came through outside it would have all the access and we don’t want the to have all the access so we will remove all permission by chmod command. (chmod 400 keyname).
+23.	Now we will try to connect to private instance. Write the SSH command and see if it is connected, if not check the issue by comparing previous steps. (ssh -I keyname username@private-ip). 
+24.	Now you will see a connection message.
