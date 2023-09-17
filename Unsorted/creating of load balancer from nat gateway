@@ -1,0 +1,42 @@
+Host a Website Using Nginix and private subnets.
+
+1.	We will follow all steps from previous question.
+2.	Go to public security group Edit Inbound and add “All ICMP IPV4” as target and select “My IP" in source and save rules.
+3.	Go to private security group Edit Inbound and add “All ICMP IPV4” as Type and search the security group of public security group and save the rule.
+4.	Open first private subnet (i.e. 192.168.3.0/24).
+5.	Open your public ec2 (Your Jumper Server, 192.168.0.0/16 ). Update the system if not done (sudo yum install update -y). install the server, here we are using Nginx (sudo amazon-linux-extras install nginx1 -y). 
+6.	Now open the Nginx config file (sudo vim /etc/nginx/nginx.config). If you think you would made some mistake create a copy of the file. (sudo cp  /etc/nginx/nginx.config /etc/nginx/nginx_original.config).
+7.	After the http directives add server details and in server add server name and location.
+```
+http {
+	upstream backend {
+			server private_ip;
+			server private_ip;
+			}
+.
+.
+.
+Server {
+		listen	80;
+		listen	[::]80;
+		server_name	public_ip
+		location / {
+			proxy_pass http://backend;
+			}
+.
+.
+.
+}
+```
+8.	Save the nginx config file and restart it. (sudo systemctl restart nginx).
+9.	Now login to private subnet (here we will go to 192.168.3.0/24). 
+10.	Update the system and install httpd.
+	sudo yum update install
+	sudo yum install httpd -y
+	sudo systemctl start httpd
+	sudo systemctl enable httpd
+11.	Now write code for html page that would be interpreted by the browser.
+ 	touch /var/www/html/index.html ; sudo echo “<h1> hello $(hostname -f)</h1>” > /var/wwww/html/index.html
+12.	Logout or log in to another private subnet and repeat the same procedure as before.
+13.	Copy the Public ip of public subnet. Paste it on a new tab in browser. 
+14.	Press refresh (F5) and see if the page changes. If it is then congratulation if not, check the previous step and tally it with your code.
