@@ -1,0 +1,24 @@
+•	Create vpc, subnet and host instance.
+
+1.	Go to VPC and click on “Create VPC”.
+2.	Select ‘VPC only’ in resources to create and give a proper name to your VPC.
+3.	In IPV4 CIDR we will select – 192.168.0.0/16
+4.	And click create.
+5.	Go to subnet and create subnet ignore the default subnets and don’t delete them.
+6.	From drop down select your vpc in VPC ID.
+7.	Give some proper name to your subnet, select proper availability zone (Mumbai ap-south-1-c doesn’t work properly so we will ignore that)
+8.	For IPv4 CIDR block we will give 192.168.1.0/24 and click on create subnet.
+9.	We will create another subnet for 192.168.2.0/24.
+10.	 Go to “Route Table” and click “Create Route Table”
+11.	Give Proper name to your route table and select your VPC and click create.
+12.	Select Action>edit subnet association and add your subnets.
+13.	Go to Internet Gateway and “Create Internet gateway”.
+14.	Give a proper name to your IGW. And click on “Create” after that you will get a option to add VPC.
+15.	Check if you have added the routes in your Route Table (it is inside routes tab)
+16.	If not present click on “Edit Routes”. Click Add Route, from drop down we will select Anywhere for now and in target we will add our IGW 
+17.	From drop down select the VPC that you have created. And click “Attach the gateway”
+18.	Now go to EC2 Service and click on “Launch an Instance”
+19.	Give proper name to your EC2 instance, select the AMI that you like, take the key pair from drop down and select the key pair.
+20.	In Network Settings click on “Edit” in VPC click on it and see if your VPC is present, if present click on it if not check the problem or follow all steps again.
+21.	We will Enable “Auto-Assign public IP” cause we don’t have our own IP. Ad for our Inbound group rules we will give it SSH and HTTP.
+22.	We will create a shell script that will run the service of HTTPD and create an html page. And click on launch the Instance.
