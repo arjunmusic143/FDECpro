@@ -6,6 +6,7 @@
 4.	Then click “Create Policy” it will open a new tab of the policy.
 5.	Click on JSON tab as we want a custom policy. 
 6.	Custom policy code – 
+
 ```
 {
 	"Version": "2012-10-17",
@@ -28,12 +29,7 @@
 	]
 }
 ```
+
 7.	The above policy states that this policy has full access of EC2 instance that is been created on 1 September 2023 at midnight and the policy will be expired on 15 September 2023 before 16 September 2023
 8.	Give proper name and Description of the policy, Click Create Policy.
 9.	The policy creation notification would be shown above.
-
-```
-function test() {
-  console.log("notice the blank line before this function?");
-}
-```
