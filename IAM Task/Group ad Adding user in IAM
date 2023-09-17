@@ -1,0 +1,7 @@
+1.	In Access Management locate the option “User Groups” and open it.
+2.	It would show the list of group, but now it would show nothing as there is no group.
+3.	Click on create group button.
+4.	Give some unique name to the group.
+5.	Add the users in that group.
+6.	You can also attach permissions policy to the group.
+7.	And the click on create group.
