@@ -1,0 +1,27 @@
+•	Create a database Name “CloudBlitz”. Create three table name FDEC-1, FDEC-2, FDEC-3 and add your name in all the table. (table data – Name, address, mobile number).
+
+1.	Open EC2 (Considering we logout also using the same SG that we created earlier)
+2.	As we already installed package for mariadb.
+3.	Login to mysql
+i.	mysql -h (here will be Endpoint of rds) -u (username of database database) -p
+4.	Now we will check number of databases present in our MySql.
+i.	show databases;
+5.	Now we will create a new database for Cloudblitz.
+i.	create database cloudblitz;
+ii.	show databases; 
+6.	Now we will select this database so that we can create table.
+i.	use cloudblitz;
+7.	Now we will create our tables.
+i.	create table fdec1 (student_name varchar(255) NOT NULL, student_address varchar(255) NOT NULL, student_mobile int(12) NOT NULL);
+ii.	create table fdec2 (student_name varchar(255) NOT NULL, student_address varchar(255) NOT NULL, student_mobile int(12) NOT NULL);
+iii.	create table fdec3 (student_name varchar(255) NOT NULL, student_address varchar(255) NOT NULL, student_mobile int(12) NOT NULL);
+iv.	show tables;
+8.	We have successfully created three tables inside our cloudblitz database.
+9.	Now we will now insert data inside our first table.
+i.	 INSERT INTO fdec1 (student_name, student_address, student_mobile) VALUES ('Rajesh Kumar', '123 Main Street, Nagpur', 1234567890) ('Priya Sharma', '456 Elm Street, Nagpur', '123456789'),  ('Amit Patel', '789 Oak Street, Nagpur', '123456780'), ('Sneha Verma', '321 Maple Street, Nagpur', '123456790'), ('Rahul Singh', '567 Pine Street, Nagpur', '123456890');
+ii.	INSERT INTO fdec2 (student_name, student_address, student_mobile) VALUES ('Anita Gupta', '789 Cherry Lane, Nagpur', '678934567'), ('Rajat Sharma', '456 Walnut Street, Nagpur', '789345678'), ('Neha Singh', '123 Birch Avenue, Nagpur', '01234589'), ('Suresh Patel', '567 Oakwood Road, Nagpur', '1234567890');
+iii.	INSERT INTO fdec3 (student_name, student_address, student_mobile) VALUES ('Amit Kumar', '789 Pine Circle, Nagpur', '234590123'), ('Sunita Jain', '345 Cedar Court, Nagpur', '345901234'), ('Rahul Verma', '678 Redwood Lane, Nagpur', '459012345'), ('Vijay Yadav', '123 Magnolia Street, Nagpur', '590123456');
+10.	Now we inserted the data successfully. Now we wil see if our data is really present in our table or not.
+i.	select * from fdec1;
+ii.	select * from fdec2;
+iii.	select * from fdec3;
