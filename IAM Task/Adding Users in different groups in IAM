@@ -1,0 +1,10 @@
+•	Create 9 user and add 3 user in each and explore the output
+
+1.	On the left side, click on "Users" to open the user management page.
+2.	Click the "Add user" button.
+3.	Give unique name – select “I want to create a IAM user” and give password whatever you want
+4.	Directly add them to desire group or give attach policy.
+5.	Add user to any three group that was created earlier.
+6.	Click next 
+7.	Click create user and download the .csv file
+8.	Repeat step 2 step 7 until 9 users are created and added to three group.
