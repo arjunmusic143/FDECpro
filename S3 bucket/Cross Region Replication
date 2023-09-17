@@ -1,9 +1,34 @@
 •	Create S3 bucket and cross region replication.
 
-1.	Go to S3 service and click on creating a new bucket (if there are no buckets)
-2.	Give it some proper name and choose the AWS REGION of this bucket. Click on VERSIONING as it is important for cross region replication. 
-3.	Then click on `create bucket` and this would create the bucket for that default region or any region you have selected.
-4.	Click on create bucket and give it a proper name (ie. Duplicate of original bucket). Choose the region where you wanted this bucket to be create apart from default.
-5.	Below region you will see a button “Choose bucket”, select that button it would open a window and it would show all the current buckets that have been created.
-6.	Choose the ‘Original bucket’ from the list and let it had the default settings.
-7.	Click on create bucket, here we duplicated the original bucket.
+
+1.	Log in to AWS Console:
+•	Go to the AWS Management Console.
+•	Sign in to your AWS account.
+2.	Access S3 Service:
+•	In the AWS Management Console, navigate to the S3 service by clicking on "Services" in the top left corner and selecting "S3" under "Storage".
+3.	Create a New Bucket:
+•	In the S3 dashboard, click the "Create bucket" button.
+•	Give your bucket a globally unique name.
+•	Choose the region where you want to create this bucket.
+4.	Configure Bucket Properties:
+•	Leave the default settings for "Block all public access" for enhanced security (unless your use case requires public access).
+•	Click "Create bucket".
+5.	Enable Versioning:
+•	Click on the newly created bucket.
+•	Under the "Properties" tab, select "Versioning".
+•	Enable versioning for this bucket, which is necessary for cross-region replication.
+6.	Create a Destination Bucket:
+•	Go back to the S3 dashboard.
+•	Click "Create bucket" again to create another bucket (your destination bucket).
+•	Give it a name and choose the destination region.
+7.	Configure Cross-Region Replication:
+•	In the destination bucket's settings, go to the "Management" tab and select "Replication".
+•	Click "Add rule" to configure replication.
+•	Choose the source bucket (the original bucket you created earlier).
+•	Specify the destination bucket you created for replication.
+•	Choose the replication rule status (e.g., Enabled).
+•	Define the IAM role for replication. You can create a new role or choose an existing one.
+•	Configure other options like prefix, encryption, and more, as needed.
+8.	Review and Confirm:
+•	Review your replication configuration settings.
+•	Click "Save" or "Create rule" to confirm the replication setup.
