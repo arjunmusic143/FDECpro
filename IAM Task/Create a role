@@ -1,0 +1,7 @@
+1.	Open aws, search for IAM service
+2.	On left side search for “Roles” inside Access Management
+3.	Click on “Create Role” button on left top side
+4.	Choose `Trusted Entity Type` & `Use Case` that suits you.
+5.	In add permission, select which policy you wanna add then click on Next button
+6.	Give proper name, description and edited trusted entity if wanna change something
+7.	Click on Create role button
