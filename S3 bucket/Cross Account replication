@@ -1,0 +1,44 @@
+•	Create S3 bucket and apply cross account replication.
+
+
+1.	Log in to AWS Console:
+2.	Sign in to the AWS Management Console of the source AWS account.
+3.	Create a Source S3 Bucket:
+4.	Navigate to the S3 service.
+5.	Click the "Create bucket" button.
+6.	Give the bucket a unique name.
+7.	Choose the appropriate region for the source bucket.
+8.	Configure other settings as needed, and create the bucket.
+9.	Configure Bucket Properties:
+10.	Under the "Properties" tab of the source bucket, select "Replication".
+11.	Click "Add rule" to set up replication.
+12.	Configure Replication Rule:
+13.	Choose the destination bucket owned by the target AWS account (Account B).
+14.	Specify the replication rule status (e.g., Enabled).
+15.	Define the IAM role that grants cross-account permissions for replication. This role should exist in Account B.
+16.	Configure other options like prefix, encryption, and more, as needed.
+17.	Save the replication rule.
+18.	Account B (Target AWS Account):
+19.	Log in to AWS Console:
+20.	Sign in to the AWS Management Console of the target AWS account (Account B).
+21.	Create a Destination S3 Bucket:
+22.	Navigate to the S3 service.
+23.	Click the "Create bucket" button.
+24.	Give the bucket a unique name.
+25.	Choose the appropriate region for the destination bucket.
+26.	Configure other settings as needed, and create the bucket.
+27.	Create IAM Role for Cross-Account Access:
+28.	In Account B, you need to create an IAM role that allows cross-account access from Account A. This role should have permissions to write objects to the destination bucket.
+29.	Trust Relationship Policy:
+30.	In the IAM role's trust relationship policy, specify Account A's AWS account ID as the trusted entity.
+31.	Attach Permissions Policy:
+32.	Attach an IAM policy to the role that grants permissions for replication, such as s3:ReplicateObject.
+33.	Provide Role ARN:
+34.	Note down the Amazon Resource Name (ARN) of the IAM role.
+35.	Back to Account A:
+36.	Verify the Trust Relationship:
+37.	Go back to Account A.
+38.	Edit the replication rule in the source bucket's replication settings.
+39.	Ensure that the IAM role ARN of the role created in Account B is correctly specified.
+40.	Save and Enable Replication:
+41.	Save the replication rule.
