@@ -1,0 +1,10 @@
+•	Create 3 groups 1 group iam_minimal  attached minimal iam permission to it, 2 nd group iam full access 3 rd ec2 minimal access.
+
+1.	 On the left side, click on "Groups" to open the group management page.
+2.	Click the "Create New Group" button.
+3.	Give a unique name to the first group, like "iam_minimal."
+4.	In policy give minimal permission policy to it. Like add “ReadOnlyAccess” to it.
+5.	Give unique name to the second group, like “iam_full_access”
+6.	In policy give full access policy. Select something like “AdministratorAccess” which would provide full Iam access to it.
+7.	For Third group give name like “ec2_minimal”
+8.	In policy tab, search “ec2”. This would show all policy from ec2. Attach a policy that provides minimal EC2-related permissions, like "AmazonEC2ReadOnlyAccess."
