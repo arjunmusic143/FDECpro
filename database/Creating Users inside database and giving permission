@@ -1,0 +1,16 @@
+•	Create 3 users (Sonu, Monu, Tonu) in database where Sonu can only read all three table (FDEC-1. FDEC-2, FDEC-3). Monu can only read FDEC-3 table and Tonu has the access of Starboy database.
+
+1.	Open EC2 (Considering we logout also using the same SG that we created earlier)
+2.	Login to mysql
+i.	mysql -h (here will be Endpoint of rds) -u (username of database database) -p
+3.	Now as we want to create user, we will first check how many users are present in our database. this user data is stored inside user database and this database consists large amount of data so we will only fetch two columns that are user name and host id.
+i.	SELECT user, host, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, Grant_priv FROM mysql.user;
+4.	After checking now we will create a user name “Sonu” who has the priviliage of only seeing database and no other permissions.
+i.	GRANT SELECT ON cloudblitz.* TO 'sonu'@'%' IDENTIFIED BY 'Password123';
+ii.	FLUSH PRIVILEGES;
+5.	Flush Privileges is a command to refreseh the database. Now we have to create a second user Monu who can only read a single table from the database.
+i.	GRANT READ ON cloudblitz.`fdec3` TO 'monu'@'%' IDENTIFIED BY 'Password123';
+ii.	FLUSH PRIVILEGES;
+6.	And third user has the access of another database 
+i.	GRANT ALL PRIVILEGES ON starboy.* TO 'tonu'@'%' IDENTIFIED BY 'Password123';
+ii.	FLUSH PRIVILEGES;
