@@ -1,0 +1,43 @@
+•	Putting data inside your database using web browser.
+
+1.	As we want to use different interface (web browser), we need to have a WebSocket. This WebSocket will help us to join our database to the other interface and save data.
+2.	The WebSocket we gonna use is Apache Tomcat 8. Go to your web search engie and search for tomcat and open tomcat apache webpage. Search for tomcat 8 and click download. It will open download page. For this we need the .zip file so copy the link address and go to your ec2 instance and paste it (considering we are running the same EC2 instance from previous question).
+i.	 curl -O hyperlink
+3.	Now we will install java in our system cause the website (where we have to put data and where our database will connect) is in java. For this we gonna use java-11-amazon-corretto-devel.x86_64
+i.	sudo yum list | grep java-11
+ii.	sudo yum install java-11-amazon-corretto-devel.x86_64
+4.	 we used grep command so that we can see only java-11 packages if we just searched normally, it would have shown all the packages available to download.
+5.	Now we will unzip the tomcat that we downloaded and shift it to /mnt.
+i.	sudo unzip tomcat.zip
+ii.	sudo mv tomcat /mnt
+6.	Before we move forward, we will first update our inbound rule of our instance.
+7.	Go to instance, select the instance (that we are using) go to security group and click on Edit inbound Rule.
+8.	Now we will add Custom TCP and range 8080 for anywhere ipv4. And also add http to anywhere.
+9.	We will now move inside the tomcat bin and start script named catalina.sh
+i.	cd /mnt/tomcat/bin
+ii.	bash catalina.sh start
+10.	Now we have to open a new tab in our web browser and check if tomcat is working or not.
+i.	Public-ip:8080
+11.	If it is opening then everything is working properly.
+12.	Now we need to install a webapp so that we can access the database through browser
+13.	This app would be in .war format and would download to webapps.
+i.	cd /mnt/tomcat/webapps
+ii.	curl -O https://s3-us-west-2.amazonaws.com/studentapi-cit/student.war
+14.	Now we will try to check if it is working or not.
+i.	Public-ic:8080/student
+15.	It will show forbidden error cause we didn’t added the connector.
+i.	curl -O https://s3-us-west-2.amazonaws.com/studentapi-cit/mysql-connector.jar
+ii.	mv connector.jar /mnt/tomcat/lib
+16.	Now we will create a database name student app so that we can interact using the web app that we downloaded.
+i.	mysql -h `targe` -u user -p
+ii.	Create database studentapp;
+iii.	Use studentapp;
+iv.	CREATE TABLE students ( student_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, student_name VARCHAR(100) NOT NULL, student_addr VARCHAR(100) NOT NULL, student_age VARCHAR(3) NOT NULL, student_qual VARCHAR(20) NOT NULL, student_percent VARCHAR(10) NOT NULL, student_year_passed VARCHAR(10) NOT NULL);
+v.	GRANT ALL PRIVILEGES ON studentapp.* TO 'zabuza'@'%' IDENTIFIED BY 'Shark';
+vi.	FLUSH PRIVILEGES;
+17.	Now refresh the website. We could see nothing much changed. 
+18.	Now we must add a resource to context.xml page so that we can connect and use rds database.
+i.	cd /mnt/tomcat/conf
+ii.	sudo vim context.xml
+19.	It will open an xml file, now just add a resource line under the context tag.
+i.	<Resource name="jdbc/TestDB" auth="Container" type="javax.sql.DataSource" maxTotal="500" maxIdle="30" maxWaitMillis="1000"  username="database_user_name" password="database_user_name_password" driverClassName="com.mysql.jdbc.Driver" url="rds_endpoint"/>
