@@ -1,0 +1,34 @@
+•	Host a static webpage of S3 bucket and enable server access logs.
+
+1.	Create an S3 Bucket:
+2.	Navigate to the S3 service.
+3.	Click the "Create bucket" button.
+4.	Give the bucket a unique name that matches your desired domain name
+5.	Choose the appropriate region for the bucket.
+6.	Configure other settings as needed, and create the bucket.
+7.	Upload Your Web Content:
+8.	Select the newly created bucket.
+9.	Click the "Upload" button to upload your HTML, CSS, JavaScript, and other static web content files.
+10.	Make sure to set the permissions for these files to be publicly readable. You can do this by selecting the files, clicking "Actions," and then "Make public."
+11.	Enable Static Website Hosting:
+12.	Under the "Properties" tab of the bucket, find the "Static website hosting" section.
+13.	Click the "Edit" button.
+14.	Select "Use this bucket to host a website."
+15.	Set the "Index document" (index.html).
+16.	Optionally, set the "Error document" if you have a custom error page.
+17.	Save the configuration.
+18.	Configure DNS (Domain Name System):
+19.	Access Your Website:
+20.	After DNS propagation (which may take some time), you can access your static website using your custom domain.
+22.	Enabling Server Access Logs:
+22.	Access Your Bucket Settings:
+23.	Go back to the S3 Management Console.
+24.	Select Your Bucket:
+25.	Click on the bucket where your website is hosted.
+26.	Enable Logging:
+27.	Under the "Properties" tab of the bucket, find the "Server access logging" section.
+28.	Click "Edit."
+29.	Enable server access logging by specifying the target bucket where access logs will be stored.
+30.	Optionally, you can prefix the log file names.
+31.	Save Configuration:
+32.	Save the configuration, and S3 will start recording access logs.
