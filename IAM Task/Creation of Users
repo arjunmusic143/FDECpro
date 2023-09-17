@@ -1,0 +1,8 @@
+•	Create 10 users
+
+1.	Search IAM and locate user tab at the left side.
+2.	Click on Users tab and then click on “Create User”, it will open the tab.
+3.	Give unique name – select “I want to create a IAM user” and give password whatever you want.
+4.	We can add user to the group or give them policies directly (here we will not give anything).
+5.	Click create user and download the .csv file.
+6.	Repeat step ii to step v until we have created 9 more accounts.
