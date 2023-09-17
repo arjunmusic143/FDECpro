@@ -1,6 +1,6 @@
 Host a Website Using Nginix and private subnets.
 
-1.	We will follow all steps from previous question.
+1.	We will follow all steps from [previous question](https://github.com/Vaibhav-Shewale/fdec/blob/main/Unsorted/Hosting%20a%20websie%20from%20Private%20Subnet).
 2.	Go to public security group Edit Inbound and add “All ICMP IPV4” as target and select “My IP" in source and save rules.
 3.	Go to private security group Edit Inbound and add “All ICMP IPV4” as Type and search the security group of public security group and save the rule.
 4.	Open first private subnet (i.e. 192.168.3.0/24).
