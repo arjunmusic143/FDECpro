@@ -1,0 +1,13 @@
+•	Create bucket, add 2 users, give one user permission of read and write, give other user permission or read only.
+
+1.	Search for bucket or S3 on AWS search bar. Click on create a new bucket if no bucket is present.
+2.	Go to IAM and create two users.
+3.	Click on the user name, in permissions policies tab click on “Create inline Policy”
+4.	Search for S3 or check below where it shows AWS popular services.
+5.	As we want first user to read and write in ACCESS LEVEL select all check box for read and write for S3.
+6.	It will show some error in recourses tab select All option and read the error.
+7.	Then click on next after resolving issue if faced any.
+8.	Give a proper policy name that you have create and click on “Create Policy”
+9.	For user to have READ ONLY permission we will follow the same procedure, but at permission we would only check all permission for READ tab.
+10.	Resolved any issue if it arises, click on next.
+11.	Give it some proper name and click on creating the policy.
