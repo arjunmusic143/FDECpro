@@ -1,0 +1,38 @@
+•	Host a 2 service in single server which is Nginx and Httpd perform this in ubuntu and amazon linux.
+
+###Ubuntu:
+1.	Update and Upgrade Packages:
+2.	bashCopy code
+3.	sudo apt update sudo apt upgrade 
+4.	Install Nginx and Apache HTTP Server:
+5.	bashCopy code
+6.	sudo apt install nginx apache2 
+7.	Start and Enable Both Services:
+8.	bashCopy code
+9.	sudo systemctl start nginx sudo systemctl enable nginx sudo systemctl start apache2 sudo systemctl enable apache2 
+10.	Configure Nginx:
+11.	Create an Nginx server block (virtual host) for your website in /etc/nginx/sites-available/ and enable it by creating a symbolic link in /etc/nginx/sites-enabled/. Modify the Nginx configuration as needed for your specific website.
+12.	Configure Apache HTTP Server:
+13.	Place your website files in the appropriate directory, typically /var/www/html/.
+14.	Create an Apache virtual host configuration file in /etc/apache2/sites-available/ and enable it by creating a symbolic link in /etc/apache2/sites-enabled/. Modify the Apache configuration as needed for your specific website.
+15.	Restart Both Services:
+16.	bashCopy code
+17.	sudo systemctl restart nginx sudo systemctl restart apache2 
+
+
+###Amazon Linux:
+18.	Update Packages:
+19.	bashCopy code
+20.	sudo yum update 
+21.	Install Nginx and Apache HTTP Server:
+22.	bashCopy code
+23.	sudo yum install nginx httpd 
+24.	Start and Enable Both Services:
+25.	bashCopy code
+26.	sudo systemctl start nginx sudo systemctl enable nginx sudo systemctl start httpd sudo systemctl enable httpd 
+27.	Configure Nginx and Apache HTTP Server:
+28.	Configure Nginx in /etc/nginx/nginx.conf and create server blocks in /etc/nginx/conf.d/ or /etc/nginx/sites-available/. Adjust the Nginx configuration to serve your website.
+29.	Configure Apache HTTP Server by placing your website files in /var/www/html/ and creating virtual host configuration files in /etc/httpd/conf.d/ or /etc/httpd/sites-available/. Modify the Apache configuration as needed for your specific website.
+30.	Restart Both Services:
+31.	bashCopy code
+32.	sudo systemctl restart nginx sudo systemctl restart httpd 
