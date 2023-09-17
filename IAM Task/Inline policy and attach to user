@@ -1,0 +1,10 @@
+1.	Go to users’ tab
+2.	Select the user to who you wanna give inline policy
+3.	Locate permission policy and click on drop down button “Add Permission”
+4.	Select “Create Inline Policy”
+5.	Search for what service you want to add.
+6.	Select different access level for that service you want to add on user (like read, write, list, permission management, tagging), Add different resources (specific will be selected by default and other option will be All)
+7.	If you wanna give other permission you can do it that also by clicking on “Add more permissions”. This will give the same options like above!
+8.	Click on Next button 
+9.	In this window add the custom policy name and it would show the custom policy that you have added. 
+10.	Click on Create Policy or if you wanna change something just click on the previous button to previous pages to change anything that you desire.
