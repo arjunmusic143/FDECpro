@@ -1,0 +1,9 @@
+•	Create S3 bucket and cross region replication.
+
+1.	Go to S3 service and click on creating a new bucket (if there are no buckets)
+2.	Give it some proper name and choose the AWS REGION of this bucket. Click on VERSIONING as it is important for cross region replication. 
+3.	Then click on `create bucket` and this would create the bucket for that default region or any region you have selected.
+4.	Click on create bucket and give it a proper name (ie. Duplicate of original bucket). Choose the region where you wanted this bucket to be create apart from default.
+5.	Below region you will see a button “Choose bucket”, select that button it would open a window and it would show all the current buckets that have been created.
+6.	Choose the ‘Original bucket’ from the list and let it had the default settings.
+7.	Click on create bucket, here we duplicated the original bucket.
