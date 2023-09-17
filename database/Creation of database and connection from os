@@ -1,0 +1,58 @@
+•	Create a table in rds with this data for the table – 
+Databse name - StarBoy Bar 
+table name - Menu
+	    (items) (price)
+Menu Colum - Dosa    200/-
+	     Mendu Vada(1 pieces) 179/-
+	     Idli(2 pieces)  98/-
+	     Rava Dosa(chutney additional) 299/-
+	     Noddles(Spicy)	350/-
+	     Manchuriyan Gravy(4 piece) 300/-
+	     Red Label(90ml)	900/-
+	     Regal Chiwas(90ml)(32 years old)	25000/-	
+	     Old Monk(90ml)	250/-
+	     Red Wine	6500/-
+	     Chakna(Complimentary Limited)
+
+1.	Search for RDS
+2.	Click on Create Database.
+3.	We will select MariaDB (we can also select MySQL).
+4.	Select Latest Engine Version (Doesn’t matter if we select old version, later if we update the system, it will also update the engine version).
+5.	For templates we will select Free tier (Cause we are still in learning phase but this will block off most of the things).
+6.	Give Some name to your Database(We will give it StarBoy).
+7.	Add a master password ( we will give Redhat!123 cause ‘@’ is not accepted in this read description of the password).
+8.	DB instance we will take is Burstable classes and select db.t3.micro
+9.	For Storage type we will select Gp2 and allocated storage to 20 GB and also we will enable auto scaling upto 1000 GB.
+10.	For Connectivity we will keep it to default network type default even VPC and DB subnet. Public Access would be selected as NO. and VPC SG would be “Existing VPC security Groups”.
+11.	We will select an availability zone from the list. We will not create the RDS Proxy. And Certificate would be default.
+12.	Database Authentication would be Password authentication.
+13.	We can select Monitoring if we want and set the Granularity. (it would be chargeable so we will not activate it).
+14.	Click “Create database”. It would take some time to create the database till it creates the database we will head to make an instance to check it.
+15.	Open EC2. Database will take time to setup.
+16.	 Launch Instance, give a proper name and we will let everything to default and click create instance.
+17.	 Now go to security Group of your new Instance and click on Edit Inbound Rule. Click on add rule in Type we will select “MYSQL/Aurora” and for source we will keep it as “Anywhere”. (it is not a good practice to keep for public but we are in learning phase).
+18.	Now we will go back to Amazon RDS here we could see now StarBoy RDS has been setup properly. Click on the db and then open security group. Click on Edit inbound security rule.
+19.	Add a new rule type all traffic and in source select the security group that you added for your ec2.
+20.	Now we will open our ec2 instance.
+21.	We could either install directly “MariaDb” packages or we could search for all packages that are available to be installed.  
+i.	sudo yum list | grep mariadb
+ii.	sudo yum install mariadb105.x86_64 -y
+22.	Now we can use mariadb. But before that we need to connect with our MariaDb. For that we we will use command.
+i.	mysql -h (here will be Endpoint of rds) -u (username of database database) -p
+23.	Now we are inside our Database.
+24.	Now we will see all the databases present in the database.
+i.	show databases;
+25.	Now create a database that you want for this we will give our database name ‘Starboy’).
+i.	create database starboy;
+ii.	show databases;
+26.	Now we can see our database has been created. We will first go inside our newly created database and then create a table inside the database.
+i.	use starboy
+ii.	CREATE TABLE Menu (item varchar(255) NOT NULL, price int(10) NOT NULL);
+iii.	show tables;
+iv.	desc Menu;
+27.	We can see our table data that we just have created.
+i.	SHOW COLUMNS FROM Menu.
+28.	Now our database has been created and as well we setup our table, now comes the main thing is the data. Table consists of data in columns.
+i.	INSERT INTO Menu (item, price) VALUES ('Dosa', 200), ('Mendu Vada (1pc)', 179), ('Idli(2pcs)', 98), ('Rava Dosa', 299), ('Noddles(Spicy)', 50),  ('Manchuriyan Gravy(4 pcs)', 300), ('Red Label(90ml)', 900), ('Regal Chiwas(32 years old)(90ml)',25000), ('Old Monk(90ml)', 250), ('Red Wine', 6500), ('Chakna(Complimentary Limited)', 0);
+ii.	select * from Menu;
+29.	Now the data has been inserted and we can see the data of our table.
