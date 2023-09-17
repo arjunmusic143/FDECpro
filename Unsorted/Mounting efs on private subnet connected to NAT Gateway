@@ -1,0 +1,1 @@
+•	Create four instances where two is public and two is private (check previous questions) and connect private route table to NAT Gateway. Install tomcat in both private but tomcat should be inside efs ( /mnt/efs/tomcat ).
