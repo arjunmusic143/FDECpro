@@ -1,0 +1,9 @@
+#!/bin/bash
+sudo yum update -y
+sudo yum install nginx mariadb105.x86_64 php8.1.x86_64 -y
+sudo su
+#rm -f /usr/share/nginx/html/*
+touch /usr/share/nginx/html/phpinfo.php
+echo "<?php phpinfo(); ?>" > /usr/share/nginx/html/phpinfo.php
+systemctl start nginx
+systemctl enable nginx
