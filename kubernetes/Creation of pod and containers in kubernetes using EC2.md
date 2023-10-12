@@ -41,16 +41,16 @@
 16.	As the cluster is been created now we will create a yaml file 
       a.	vim pod.yaml
 ```
-          apiVersion: v1
-          kind: Pod
-          metadata:
-            name: nginx
-          spec:
-            containers:
-            - name: nginx
-              image: nginx:1.14.2
-              ports:
-              - containerPort: 80
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
 ```
 17.	Now the yaml file has been created now we have to create the pod using it, to do it so we required this file to run
       a.	kubectl apply -f pod.yaml       # There is a script that do everyhing from step 8 step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation)
