@@ -1,4 +1,5 @@
-Creation of Pod in AWS using kubectl
+# Creation of Pod in AWS using kubectl
+
 1.	Search IAM service in aws search console
 2.	Give a proper name, select IAM user and create a password and untick the option of creating new password when login and press Next button. In permission select the “Attach policies directly” and then search for “AdministratorAccess” select it and press Next button.
 3.	Check the creation detail proper if any mistake is present and then press Create User button.
