@@ -1,5 +1,5 @@
 # This code will install Kubectl and eksctl and create cluster on aws 
-
+```
 #!/bin/bash
 cp -r .aws aws
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl
@@ -16,3 +16,4 @@ sudo mv /tmp/eksctl /usr/local/bin
 # Below code will start creating cluster for 2 nodes
 eksctl create cluster --node-type=t3.medium --nodes=2
 vim pod.yaml
+```
