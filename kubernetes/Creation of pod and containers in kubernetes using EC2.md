@@ -15,7 +15,7 @@
       b.	mkdir aws
       c.	cp -r .aws aws
 8.	 Now we need to Install ‘kubectl’. We gonna need install n-1 version means we need to install one previous version from the release version
-      a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation)
+      a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
 9.	Now check the permission of the kubectl, for that we gonna use long list.
       a.	ll
 10.	It would show the permission allowed to the newly downloaded file. Now we need to add the execution permission to the newly downloaded directory “Kubectl”.
@@ -53,7 +53,7 @@ spec:
     - containerPort: 80
 ```
 17.	Now the yaml file has been created now we have to create the pod using it, to do it so we required this file to run
-      a.	kubectl apply -f pod.yaml       # There is a script that do everyhing from step 8 step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation)
+      a.	kubectl apply -f pod.yaml       # There is a script that do everyhing from step 8 step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
 18.	It would show the message of pod creation, now to check the pod status so that to know if it is been created or now
       a.	kubectl get pod
 19.	To know the details of the pod and different configuration added to it we will run
