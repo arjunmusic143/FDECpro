@@ -7,6 +7,7 @@
 5.	 Open EC2 service and create an instance with default security group and details and click on Create Instance.
 6.	Open your Instance in your desired environment.
 7.	Now we need to create aws config file and then create a folder where the file would be shif
+8.	`
       a.	aws configure
           i.	Enter the Access Key Id
           ii.	Enter the Secret Access key 
@@ -14,18 +15,19 @@
           iv.	-Let this be default-
       b.	mkdir aws
       c.	cp -r .aws aws
-8.	 Now we need to Install ‘kubectl’. We gonna need install n-1 version means we need to install one previous version from the release version
+  	`
+10.	 Now we need to Install ‘kubectl’. We gonna need install n-1 version means we need to install one previous version from the release version
       a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
-9.	Now check the permission of the kubectl, for that we gonna use long list.
+11.	Now check the permission of the kubectl, for that we gonna use long list.
       a.	ll
-10.	It would show the permission allowed to the newly downloaded file. Now we need to add the execution permission to the newly downloaded directory “Kubectl”.
+12.	It would show the permission allowed to the newly downloaded file. Now we need to add the execution permission to the newly downloaded directory “Kubectl”.
       a.	chmod +x ./kubectl
       b.	ll
-11.	Now you can see that kubectl is in execution mode but if you try to write kubectl it would show bash error cause we need to add in binary file.
+13.	Now you can see that kubectl is in execution mode but if you try to write kubectl it would show bash error cause we need to add in binary file.
       a.	mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
       b.	kubectl
-12.	Now it would not show any bash error and show the list of commands that can be used using kubectl.
-13.	Now we need to create cluster and the cluster is been created using ‘eksctl’. For this we can find the installation guide from the official website https://eksctl.io/installation/. To install we gonna make a shell script file.
+14.	Now it would not show any bash error and show the list of commands that can be used using kubectl.
+15.	Now we need to create cluster and the cluster is been created using ‘eksctl’. For this we can find the installation guide from the official website https://eksctl.io/installation/. To install we gonna make a shell script file.
       a.	vim shell.sh
       b.	# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
             ARCH=amd64
@@ -35,10 +37,10 @@
             curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
             tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
             sudo mv /tmp/eksctl /usr/local/bin
-14.	Now we gonna need to create the cluster.
+16.	Now we gonna need to create the cluster.
       a.	eksctl create cluster --node-type=t3.medium --nodes=2
-15.	It would take time to build, open aws and check cloudformation and check the cluster is been created or not.
-16.	As the cluster is been created now we will create a yaml file 
+17.	It would take time to build, open aws and check cloudformation and check the cluster is been created or not.
+18.	As the cluster is been created now we will create a yaml file 
       a.	vim pod.yaml
 ```
 apiVersion: v1
