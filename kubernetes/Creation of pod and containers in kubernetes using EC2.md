@@ -7,7 +7,7 @@
 5.	 Open EC2 service and create an instance with default security group and details and click on Create Instance.
 6.	Open your Instance in your desired environment.
 7.	Now we need to create aws config file and then create a folder where the file would be shif
-8.	`
+8.	```
       a.	aws configure
           i.	Enter the Access Key Id
           ii.	Enter the Secret Access key 
@@ -15,7 +15,7 @@
           iv.	-Let this be default-
       b.	mkdir aws
       c.	cp -r .aws aws
-  	`
+  	```
 10.	 Now we need to Install ‘kubectl’. We gonna need install n-1 version means we need to install one previous version from the release version
       a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
 11.	Now check the permission of the kubectl, for that we gonna use long list.
