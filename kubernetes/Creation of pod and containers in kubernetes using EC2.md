@@ -9,9 +9,7 @@
 7.	Now we need to create aws config file and then create a folder where the file would be shif
 8.	```
       a.	aws configure
-   
           i.	Enter the Access Key Id
-
           ii.	Enter the Secret Access key 
           iii.	Enter the region (for this I have put `ap-south-1`)
           iv.	-Let this be default-
