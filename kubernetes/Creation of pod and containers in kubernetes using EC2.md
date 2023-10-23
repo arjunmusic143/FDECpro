@@ -18,9 +18,9 @@
   	```
 8.	 Now we need to Install ‘kubectl’. We gonna need install n-1 version means we need to install one previous version from the release version
   ``
-      a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
-  ``
-10.	Now check the permission of the kubectl, for that we gonna use long list.
+      a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl
+   ``  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
+    10.	Now check the permission of the kubectl, for that we gonna use long list.
     ``
       a.	ll
     ``
