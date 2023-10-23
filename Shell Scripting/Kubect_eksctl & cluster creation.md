@@ -14,7 +14,7 @@ curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_ch
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
 # Below code will start creating cluster for 2 nodes
-#eksct create cluster --name=kube --node-type=t3.medium --nodes=2 --region=ap-south-1
+#eksctl create cluster --name=damno --node-type=t3.medium --nodes=1 --region=ap-south-1
 eksctl create cluster --node-type=t3.medium --nodes=2
 vim pod.yaml
 ```
