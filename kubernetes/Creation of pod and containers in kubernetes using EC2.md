@@ -17,22 +17,22 @@
       c.	cp -r .aws aws
   	```
 8.	 Now we need to Install ‘kubectl’. We gonna need install n-1 version means we need to install one previous version from the release version
-  ```
+  ``
       a.	curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.5/2023-09-14/bin/linux/amd64/kubectl  # There is a script that do everyhing from step 8 to step 17 --> [Script](https://github.com/Vaibhav-Shewale/fdec/blob/main/Shell%20Scripting/Kubect_eksctl%20%26%20cluster%20creation.md)
-  ```
+  ``
 10.	Now check the permission of the kubectl, for that we gonna use long list.
-	```
+    ``
       a.	ll
-    ```
+    ``
 11.	It would show the permission allowed to the newly downloaded file. Now we need to add the execution permission to the newly downloaded directory “Kubectl”.
-    ```
+    ``
       a.	chmod +x ./kubectl
       b.	ll
-    ```
+    ``
 12.	Now you can see that kubectl is in execution mode but if you try to write kubectl it would show bash error cause we need to add in binary file.
-      ```
+      ``
       a.	mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
-      b.	kubectl```
+      b.	kubectl ``
 13.	Now it would not show any bash error and show the list of commands that can be used using kubectl.
 14.	Now we need to create cluster and the cluster is been created using ‘eksctl’. For this we can find the installation guide from the official website https://eksctl.io/installation/. To install we gonna make a shell script file.
 ```
