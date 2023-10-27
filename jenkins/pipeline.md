@@ -1,0 +1,144 @@
+•	Creating a pipeline project in Jenkins for back end and pushing the image in Elastic Container Registry
+1.	Copy the below code to download the package and run the Jenkins in local instance
+   ''
+      sudo wget -O /etc/yum.repos.d/jenkins.repo \
+      https://pkg.jenkins.io/redhat-stable/jenkins.repo
+      sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+      sudo yum upgrade
+      sudo yum install fontconfig java-17* -y
+      sudo yum install jenkins -y
+      sudo systemctl daemon-reload
+      sudo systemctl enable jenkins
+      sudo systemctl start jenkins
+      sudo systemctl status jenkins
+      sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+   ''
+3.	Open the Jenkins page using the public-ip
+''
+  a.	Open Browser
+  b.	Public-ip:8080
+''
+4.	Enter the details according the instructions and wait for few seconds the packages to get installed.
+5.	Click on New item at the left corner, give some proper name to the item and select the pipeline from option and press ok button below
+6.	Scroll down and you will find the pipelie area to write the block.
+7.	We will create the pipeline in block by block format.
+8.	Before moving forward the skeleton of the pipeline is –
+    a.	SKELETON
+  	''
+  	pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+    ''
+9.	In first build we will install git in our Jenkins and pull the file from git and check if it is working or not
+    ''
+    pipeline{
+	agent any
+	stages {
+		stage('git checkout') {
+		steps {
+		    sh ''' sudo yum install git -y
+		    rm -rf student-ui
+		    git clone https://github.com/Vaibhav-Shewale/student-ui.git'''
+		}
+		}
+	}
+}
+   ''
+10.	Now this code will show error as the Jenkins has no sudo access. We will add Jenkins to sudors so that it can run properly withput asking the password (in real time scenario we don’t give all access to the Jenkins users as it will affect or may cause major issue.
+11.	Open the linux in your any environment and add the Jenkins in sudors and add the Jenkins user below the root user also we will add the nopasswd so that it would not ask for password of the user when it would be used. 
+    ''
+    a.	sudo vim /etc/sudoers
+    b.	 root    ALL=(ALL)       ALL
+    c.	jenkins ALL=(ALL) NOPASSWD:ALL
+   	''
+13.	Now click on the build if it is working or not, if it is not then check the previous steps for any that you have left mistakenly.
+14.	Now we will create a new block that will be used to create a dockerfile in our Jenkins
+    ''
+   	stage('docker file') {
+			steps{
+				sh '''
+				rm -rf artifact
+				git clone https://github.com/Vaibhav-Shewale/artifacts.git
+				ls -al
+				'''
+			}
+		}
+    ''
+15.	Now we have built the file, and need to have to push this image to a container, generally we used to push this image in our docker but we have to automate this thing via Jenkins pipeline but to do so it would require us enterprise version but we are doing this for free version so we will use “Amazon Elastic Container Registry”. 
+16.	Go to search bar of the AWS and search “Amazon Elastic Container Registry” and select the service. Click on Get Started Button under a Create a Repository.
+17.	Give some proper name for your repository and let other settings to default and click on Create Repository.
+18.	Now click the name of the repository you created and you will get inside your repository. Check the right side and you will see the button with “View Push Command” click on it. (you can also just select the image and the button would be active outside as well it is good if you wanna push in more then one repository)
+19.	Now go back to your instance and select the instance you’re working on and click on Action search for Security and click on it and select “Modify IAM role”.  Select the IAM role that has admin access and then click on “Update IAM role”.   
+20.	Go back to AECR service and pick the desire code (According to your system). For this we will select AWS CLI (it will help to access the pipeline and service to communicate) Image tag (to tag the image with unique name) and then we will need to push the image to our repo so.
+21.	We will add the final block in our pipeline.
+'''
+stage('docker push') {
+			steps{
+				sh '''
+				aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 203772634753.dkr.ecr.ap-south-1.amazonaws.com
+				sudo docker tag studentapp 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
+				sudo docker push 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
+				'''
+			}
+		}
+'''
+22.  The whole master file is this
+'''
+pipeline{
+	agent any
+	
+	stages{
+		stage('git checkout') {
+			steps{
+				sh ''' 
+				sudo yum install git -y
+				rm -rf student-ui
+				git clone https://github.com/Vaibhav-Shewale/student-ui.git
+				'''
+			}
+		}
+		stage('docker file') {
+			steps{
+				sh '''
+				rm -rf artifacts
+				git clone https://github.com/Vaibhav-Shewale/artifacts.git
+				ls -al
+				'''
+			}
+		}
+		stage('docker build') {
+			steps{
+				sh '''
+				sudo yum install docker -y
+				sudo systemctl start docker
+				sudo systemctl enable docker
+				cd artifacts/backend/
+				sudo cp -rf ../../student-ui ./
+				sudo docker build -t studentapp .
+				ls -al
+				'''
+			}
+			
+		}
+		stage('docker push') {
+			steps{
+				sh '''
+				aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 203772634753.dkr.ecr.ap-south-1.amazonaws.com
+				sudo docker tag studentapp 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
+				sudo docker push 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
+				'''
+			}
+		}
+		}
+	}
+
+'''
+24.		Now open the service and select the repository that you have created and check if the image is been uploaded or not(check only after pipeline is run successfully). Click the service refresh button if the page is on.
