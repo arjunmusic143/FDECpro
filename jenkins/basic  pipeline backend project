@@ -1,6 +1,6 @@
 •	Creating a pipeline project in Jenkins for back end and pushing the image in Elastic Container Registry
 
-1.	Copy the below code to download the package and run the Jenkins in local instance
+1.	In Ec2 instance select t3.medium or higher to run smoothly as Jenkins need more resources. Copy the below code to download the package and run the Jenkins in local instance
    
       sudo wget -O /etc/yum.repos.d/jenkins.repo \
       https://pkg.jenkins.io/redhat-stable/jenkins.repo
