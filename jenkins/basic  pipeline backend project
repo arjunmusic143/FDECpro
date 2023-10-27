@@ -40,18 +40,19 @@
     
 8.	In first build we will install git in our Jenkins and pull the file from git and check if it is working or not
     
-    pipeline{
+   pipeline{
 	agent any
 	stages {
 		stage('git checkout') {
 		steps {
-		    sh  sudo yum install git -y
+		    sh ''' sudo yum install git -y
 		    rm -rf student-ui
-		    git clone https://github.com/Vaibhav-Shewale/student-ui.git
+		    git clone https://github.com/Vaibhav-Shewale/student-ui.git'''
 		}
 		}
 	}
-}
+
+
    
 9.	Now this code will show error as the Jenkins has no sudo access. We will add Jenkins to sudors so that it can run properly withput asking the password (in real time scenario we don’t give all access to the Jenkins users as it will affect or may cause major issue.
 10.	Open the linux in your any environment and add the Jenkins in sudors and add the Jenkins user below the root user also we will add the nopasswd so that it would not ask for password of the user when it would be used. 
@@ -65,13 +66,14 @@
     
    	stage('docker file') {
 			steps{
-				sh 
+				sh '''
 				rm -rf artifact
 				git clone https://github.com/Vaibhav-Shewale/artifacts.git
 				ls -al
-				
+				'''
 			}
 		}
+
     
 13.	Now we have built the file, and need to have to push this image to a container, generally we used to push this image in our docker but we have to automate this thing via Jenkins pipeline but to do so it would require us enterprise version but we are doing this for free version so we will use “Amazon Elastic Container Registry”. 
 14.	Go to search bar of the AWS and search “Amazon Elastic Container Registry” and select the service. Click on Get Started Button under a Create a Repository.
@@ -83,13 +85,14 @@
 
 stage('docker push') {
 			steps{
-				sh 
+				sh '''
 				aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 203772634753.dkr.ecr.ap-south-1.amazonaws.com
 				sudo docker tag studentapp 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
 				sudo docker push 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
-				
+				'''
 			}
 		}
+
 
 20.  The whole master file is this
 
@@ -97,27 +100,27 @@ pipeline{
 	agent any
 	
 	stages{
-s		stage('git checkout') {
+		stage('git checkout') {
 			steps{
-				sh  
+				sh ''' 
 				sudo yum install git -y
 				rm -rf student-ui
 				git clone https://github.com/Vaibhav-Shewale/student-ui.git
-				
+				'''
 			}
 		}
 		stage('docker file') {
 			steps{
-				sh 
+				sh '''
 				rm -rf artifacts
 				git clone https://github.com/Vaibhav-Shewale/artifacts.git
 				ls -al
-				
+				'''
 			}
 		}
 		stage('docker build') {
 			steps{
-				sh 
+				sh '''
 				sudo yum install docker -y
 				sudo systemctl start docker
 				sudo systemctl enable docker
@@ -125,21 +128,22 @@ s		stage('git checkout') {
 				sudo cp -rf ../../student-ui ./
 				sudo docker build -t studentapp .
 				ls -al
-				
+				'''
 			}
 			
 		}
 		stage('docker push') {
 			steps{
-				sh 
+				sh '''
 				aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 203772634753.dkr.ecr.ap-south-1.amazonaws.com
 				sudo docker tag studentapp 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
 				sudo docker push 203772634753.dkr.ecr.ap-south-1.amazonaws.com/tomcat-student:latest
-				
+				'''
 			}
 		}
 		}
 	}
+
 
 
 21.		Now open the service and select the repository that you have created and check if the image is been uploaded or not(check only after pipeline is run successfully). Click the service refresh button if the page is on.
