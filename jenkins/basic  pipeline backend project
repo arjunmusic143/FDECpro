@@ -74,14 +74,28 @@
 			}
 		}
 
-    
-13.	Now we have built the file, and need to have to push this image to a container, generally we used to push this image in our docker but we have to automate this thing via Jenkins pipeline but to do so it would require us enterprise version but we are doing this for free version so we will use “Amazon Elastic Container Registry”. 
-14.	Go to search bar of the AWS and search “Amazon Elastic Container Registry” and select the service. Click on Get Started Button under a Create a Repository.
-15.	Give some proper name for your repository and let other settings to default and click on Create Repository.
-16.	Now click the name of the repository you created and you will get inside your repository. Check the right side and you will see the button with “View Push Command” click on it. (you can also just select the image and the button would be active outside as well it is good if you wanna push in more then one repository)
-17.	Now go back to your instance and select the instance you’re working on and click on Action search for Security and click on it and select “Modify IAM role”.  Select the IAM role that has admin access and then click on “Update IAM role”.   
-18.	Go back to AECR service and pick the desire code (According to your system). For this we will select AWS CLI (it will help to access the pipeline and service to communicate) Image tag (to tag the image with unique name) and then we will need to push the image to our repo so.
-19.	We will add the final block in our pipeline.
+13.	Now we will build this docker file that we have pulled and shift the student artifact to new working directory and build an image
+
+	stage('docker build') {
+			steps{
+				sh '''
+				sudo yum install docker -y
+				sudo systemctl start docker
+				sudo systemctl enable docker
+				cd artifacts/backend/
+				cp ../../student-ui .
+				sudo docker build -t studentapp .
+				ls -al
+				'''			}
+		}
+
+14.	Now we have built the file, and need to have to push this image to a container, generally we used to push this image in our docker but we have to automate this thing via Jenkins pipeline but to do so it would require us enterprise version but we are doing this for free version so we will use “Amazon Elastic Container Registry”. 
+15.	Go to search bar of the AWS and search “Amazon Elastic Container Registry” and select the service. Click on Get Started Button under a Create a Repository.
+16.	Give some proper name for your repository and let other settings to default and click on Create Repository.
+17.	Now click the name of the repository you created and you will get inside your repository. Check the right side and you will see the button with “View Push Command” click on it. (you can also just select the image and the button would be active outside as well it is good if you wanna push in more then one repository)
+18.	Now go back to your instance and select the instance you’re working on and click on Action search for Security and click on it and select “Modify IAM role”.  Select the IAM role that has admin access and then click on “Update IAM role”.   
+19.	Go back to AECR service and pick the desire code (According to your system). For this we will select AWS CLI (it will help to access the pipeline and service to communicate) Image tag (to tag the image with unique name) and then we will need to push the image to our repo so.
+20.	We will add the final block in our pipeline.
 
 stage('docker push') {
 			steps{
@@ -94,7 +108,7 @@ stage('docker push') {
 		}
 
 
-20.  The whole master file is this
+21.  The whole master file is this
 
 pipeline{
 	agent any
@@ -146,4 +160,4 @@ pipeline{
 
 
 
-21.		Now open the service and select the repository that you have created and check if the image is been uploaded or not(check only after pipeline is run successfully). Click the service refresh button if the page is on.
+22.		Now open the service and select the repository that you have created and check if the image is been uploaded or not(check only after pipeline is run successfully). Click the service refresh button if the page is on.
