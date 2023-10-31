@@ -186,7 +186,7 @@ pipeline {
             steps {
                 sh '''
                 aws eks update-kubeconfig --region ap-south-1 --name ukki
-                /usr/local/bin/kubectl apply -f .
+                kubectl apply -f .
                 '''
             }
         }
