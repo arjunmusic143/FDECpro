@@ -36,7 +36,7 @@ curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$
 curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
 tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 sudo mv /tmp/eksctl /usr/local/bin
-# Below code will start creating cluster for 2 nodes
+# Below code will start creating cluster for 1 nodes
 eksctl create cluster --name=ukki --node-type=t3.medium --nodes=1 --region=ap-south-1
 ```
 6.	 In end after all process is done we will see the password, now open the browser and input the address.
