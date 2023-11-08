@@ -1,0 +1,200 @@
+•	Create EC2 instance and S3 bucket and mount S3 Bucket to the instance using Terraform
+
+1.	For this at start we will create a main file and then we will segregate   them into different variable files.
+2.	In start we gonna need the header file of our terraform file.
+``
+	terraform {
+  	  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.23.1"
+    }
+  }
+}
+``
+3.	Now we included the header file with its versioning it will help the terraform command to understand the file.
+4.	Now we gonna need the provider for the cloud service we’re using (we can use other cloud platform as well but I will use aws).
+``
+	provider "aws" {
+  region     = "DESIRED_REGION"
+  access_key = "YOUR_ACCESS_KEY"
+  secret_key = "YOUR_SECRET_KEY"
+}
+``
+5.	Now the provider is been added we can access the aws using the access key and the private key. We could directly write the code for the instance but before that we wanted to add a role to the instance so that the instance would be able to access another service of AWS that is S3.
+``
+	resource "aws_iam_role" "ec2_role" #Ffirst part is the name of the resource and the second part is the name we given to the resource so that we can call it {
+  name = "EC2S3AccessRole" #Role_name
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+``
+6.	The above block will help us to create the role. But to attach the role to the instance we cant search and add, so to tackle that we gonna fetch the id of the newly created policy
+``
+	resource "aws_iam_role_policy" "s3_access_policy" {
+  name = "s3_access_policy"
+  role = aws_iam_role.ec2_role.id
+``
+7.	Role has been created now the thing we need is the policy so that the instance can perform some task on the S3
+``
+	 policy = jsonencode({
+   Version = "2012-10-17"
+    	   Statement = [
+      	     {
+        	Action = [
+          	  "s3:ListAllMyBuckets",
+        	]
+        	Effect   = "Allow"
+        	Resource = "*"
+      	     },
+      	     {
+       	 Action = [
+            	     "s3:ListBucket",
+	     "s3:PutObject",
+       	     "s3:GetObject",
+		     “s3:DeleteObject”
+           ] 
+           Effect   = "Allow"
+   	     Resource = ["arn:aws:s3:::WRITE_YOUR_BUCKET_NAME_HERE","arn:aws:s3:::REPEAT_THE_NAME_OF_BUCKET/*"]
+    }
+         ]
+  	})
+     }
+``
+8.	The policy is been created but that would not automatically attach to the bucket so to do that we have to attach that policy.
+``
+  resource "aws_iam_instance_profile" "ec2_instance_profile" {
+  name = "EC2S3AccessRole"
+  role = aws_iam_role.ec2_role.name
+}
+``
+9.	Now that role and policy is been sorted now we will create the ec2 instance and attach the role to it so that I can access the other service (here we have given right for S3) and policy so that it can create, get and delete.
+``
+	resource "aws_instance" "new" {
+  ami           = "AMI_CODE"
+  instance_type = "INSTANCE_TYPE_YOU_WANT "
+  key_name      = "KEY_YOU_HAVE"
+  security_groups = ["CUSTOM_SG"]
+  subnet_id = "CUSTOM_OR_DEFAULT_SUBNET_ID"
+
+    iam_instance_profile = RESOURCE_NAME_OF_THE_POLICY.THE_NAME_YOU_HAVE_GIVEN_TO_POLICY.name
+
+  tags = {
+    Name = "TAG_YOU_WANTED_TO_ADD_ON_YOUR_INSTANCE"
+  }	
+}
+``
+10.	 Now the only thing remain is the S3 bucket to be created 
+``
+	resource "aws_s3_bucket" "create-s3-bucket" {
+  bucket = "baja-bajati-ladki"
+}
+``
+11. The Master code, the code is written in a single file it can even be written in modules or in different files.
+```
+terraform {
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "5.23.1"
+    }
+  }
+}
+
+provider "aws" {
+  region     = "ap-south-1"
+  access_key = "ACCESS_KEY"
+  secret_key = "SECRET_KEY"
+}
+
+resource "aws_iam_role" "ec2_role" {
+  name = "EC2S3AccessRole"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "s3_access_policy" {
+  name = "s3_access_policy"
+  role = aws_iam_role.ec2_role.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "s3:ListAllMyBuckets",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+      {
+        Action = [
+            "s3:ListBucket",
+            "s3:PutObject",
+            "s3:GetObject",
+            "s3:DeleteObject"
+        ]
+        Effect   = "Allow"
+        Resource = ["arn:aws:s3:::baja-bajati-ladki","arn:aws:s3:::baja-bajati-ladki/*"]
+      }   
+    ]
+  })
+}
+
+resource "aws_iam_instance_profile" "ec2_instance_profile" {
+  name = "EC2S3AccessRole"
+  role = aws_iam_role.ec2_role.name
+}
+
+
+# resource "aws_iam_role_policy_attachment" "s3_access_attachment" {
+#  policy_arn = aws_iam_policy.s3_access_policy.arn
+#   role       = aws_iam_role.ec2_role.name
+# }
+
+resource "aws_instance" "new" {
+  ami           = "ami-05c0f5389589545b7"
+  instance_type = "t3.medium"
+  key_name      = "newkeyMumabi"
+  security_groups = ["sg-0aebb652d4d462066"]
+  subnet_id = "subnet-0e421d91104edfea6"
+
+  # iam_instance_profile = aws_iam_role.ec2_role.name
+
+    iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile.name
+
+
+  tags = {
+    Name = "Mera_Naam"
+  }
+
+}
+
+resource "aws_s3_bucket" "create-s3-bucket" {
+  bucket = "baja-bajati-ladki"
+}
+```
